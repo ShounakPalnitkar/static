@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CKD Risk Assessment Tool</title>
+  <meta charset="UTF-8">
+  <title>CKD Prediction Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f4f8;
-      margin: 0;
-      padding: 20px;
+      padding: 40px;
+      background: #f4f6f9;
     }
 
     h1 {
       text-align: center;
-      color: #2c3e50;
+      color: #333;
     }
 
     form {
       max-width: 600px;
-      margin: 20px auto;
-      background: #ffffff;
+      margin: 0 auto;
       padding: 30px;
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     label {
@@ -42,8 +41,8 @@
 
     button {
       margin-top: 20px;
-      padding: 12px 20px;
-      background-color: #1a6fc9;
+      padding: 12px 24px;
+      background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 8px;
@@ -52,214 +51,56 @@
     }
 
     button:hover {
-      background-color: #145a9e;
+      background-color: #45a049;
     }
 
     #result {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
-      color: #27ae60;
-    }
-
-    /* Chatbot styles */
-    #chatbot-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-family: Arial, sans-serif;
-      z-index: 9999;
-    }
-
-    #chatbot-toggle {
-      background-color: #1a6fc9;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    #chatbox {
-      position: absolute;
-      bottom: 70px;
-      right: 0;
-      width: 300px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    #chatbox.hidden {
-      display: none;
-    }
-
-    #chat-messages {
-      height: 250px;
-      padding: 10px;
-      overflow-y: auto;
-      border-bottom: 1px solid #eee;
-    }
-
-    #chat-messages p {
-      margin: 6px 0;
-      padding: 8px;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff8dc;
+      border-left: 5px solid #ff9800;
       border-radius: 10px;
-      max-width: 80%;
-    }
-
-    .user {
-      background-color: #dff0fd;
-      align-self: flex-end;
-    }
-
-    .bot {
-      background-color: #f1f1f1;
-      align-self: flex-start;
-    }
-
-    #chat-input {
-      padding: 10px;
-      border: none;
-      border-top: 1px solid #eee;
-      flex: 1;
-      font-size: 14px;
-      width: 100%;
-    }
-
-    #send-btn {
-      padding: 10px;
-      border: none;
-      background-color: #1a6fc9;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border-top: 1px solid #eee;
     }
   </style>
 </head>
 <body>
 
-  <h1>CKD Risk Assessment Tool</h1>
+  <h1>CKD Prediction Form</h1>
 
   <form id="ckd-form">
     <label for="age">Age:</label>
-    <input type="number" id="age" required />
+    <input type="number" id="age" name="age" required>
 
-    <label for="bp">Blood Pressure (mm Hg):</label>
-    <input type="number" id="bp" required />
+    <label for="bp">Blood Pressure:</label>
+    <input type="number" id="bp" name="bp" required>
 
-    <label for="sugar">Blood Sugar (mg/dL):</label>
-    <input type="number" id="sugar" required />
+    <label for="sg">Specific Gravity:</label>
+    <input type="text" id="sg" name="sg" required>
 
-    <label for="diabetes">Diabetic:</label>
-    <select id="diabetes">
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
+    <label for="al">Albumin:</label>
+    <input type="text" id="al" name="al" required>
 
-    <label for="smoking">Smoker:</label>
-    <select id="smoking">
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
+    <!-- Add more fields as needed -->
 
-    <button type="submit">Assess Risk</button>
+    <button type="submit">Predict CKD</button>
   </form>
 
   <div id="result"></div>
 
-  <!-- Chatbot UI -->
-  <div id="chatbot-container">
-    <button id="chatbot-toggle">💬</button>
-    <div id="chatbox" class="hidden">
-      <div id="chat-messages"></div>
-      <input type="text" id="chat-input" placeholder="Type a question..." />
-      <button id="send-btn">Send</button>
-    </div>
-  </div>
+  <!-- ✅ Embedded Chatbot -->
+  <iframe 
+    src="https://agent.jotform.com/0195bf7a139274149d20a98efdf483b08976" 
+    style="position: fixed; bottom: 20px; right: 20px; width: 350px; height: 500px; border: none; border-radius: 12px; z-index: 9999; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"
+    allow="microphone; camera">
+  </iframe>
 
   <script>
-    // Risk assessment logic
-    document.getElementById('ckd-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const age = parseInt(document.getElementById('age').value);
-      const bp = parseInt(document.getElementById('bp').value);
-      const sugar = parseInt(document.getElementById('sugar').value);
-      const diabetes = document.getElementById('diabetes').value === 'yes';
-      const smoking = document.getElementById('smoking').value === 'yes';
-
-      let riskScore = 0;
-
-      if (age > 60) riskScore += 2;
-      if (bp > 140) riskScore += 2;
-      if (sugar > 180) riskScore += 2;
-      if (diabetes) riskScore += 2;
-      if (smoking) riskScore += 1;
-
-      let result = '';
-      if (riskScore >= 7) result = 'High Risk of CKD';
-      else if (riskScore >= 4) result = 'Moderate Risk of CKD';
-      else result = 'Low Risk of CKD';
-
-      document.getElementById('result').textContent = `Result: ${result}`;
+    document.getElementById('ckd-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = "Prediction complete. [This is a static example. Replace this with real logic.]";
     });
-
-    // Chatbot toggle
-    const toggleBtn = document.getElementById('chatbot-toggle');
-    const chatbox = document.getElementById('chatbox');
-    toggleBtn.addEventListener('click', () => {
-      chatbox.classList.toggle('hidden');
-    });
-
-    // Chatbot logic
-    const messages = document.getElementById('chat-messages');
-    const input = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
-
-    const botReplies = {
-      hello: "Hi there! I'm your CKD helper bot. Ask me about kidney health!",
-      risk: "The CKD Risk Score considers age, diabetes, blood pressure, and more.",
-      diet: "For kidney health, reduce sodium, eat fresh fruits, and stay hydrated.",
-      contact: "Please consult your healthcare provider for medical advice.",
-      default: "I'm here to help with basic questions about CKD risk!"
-    };
-
-    sendBtn.addEventListener('click', sendMessage);
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
-    });
-
-    function sendMessage() {
-      const userInput = input.value.trim();
-      if (!userInput) return;
-
-      appendMessage(userInput, 'user');
-      input.value = '';
-
-      const lower = userInput.toLowerCase();
-      let reply = botReplies.default;
-      Object.keys(botReplies).forEach(key => {
-        if (lower.includes(key)) reply = botReplies[key];
-      });
-
-      setTimeout(() => appendMessage(reply, 'bot'), 500);
-    }
-
-    function appendMessage(text, sender) {
-      const msg = document.createElement('p');
-      msg.className = sender;
-      msg.textContent = text;
-      messages.appendChild(msg);
-      messages.scrollTop = messages.scrollHeight;
-    }
   </script>
 
 </body>
